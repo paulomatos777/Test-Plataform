@@ -13,9 +13,9 @@ function TestCard({ id, name, description, category, state, handleRemove }) {
         <span>Descrição:</span>
         {description}
       </p>
-      <p className={styles.category_text}>
+      {/* <p className={styles.category_text}>
         <span className={`${styles[category.toLowerCase()]}`}></span> {category}
-      </p>
+      </p> */}
       {/* <p className={styles.state_text}>
         <span className={`${styles[state.toLowerCase()]}`}></span> {state}
       </p> */}

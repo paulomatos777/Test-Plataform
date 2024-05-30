@@ -67,12 +67,12 @@ function Teste() {
 
   return (
     <>
-      {teste.test_title ? (
+      {teste.name ? (
         <div className={styles.teste_details}>
           <Container customClass="column">
             {message && <Message type={type} msg={message} />}
             <div className={styles.details_container}>
-              <h1>Teste: {teste.test_title}</h1>
+              <h1>Teste: {teste.name}</h1>
               <button className={styles.btn} onClick={toogleProjectForm}>
                 {!showTesteForm ? "Editar Projeto" : "Fechar"}
               </button>
@@ -80,16 +80,16 @@ function Teste() {
                 <div className={styles.teste_info}>
                   <p>
                     <span>Ambiente: </span>
-                    {teste.test_environment}
+                    {teste.max_value}
                   </p>
                   <p>
                     <span>Nome: </span>
-                    {teste.test_title}
+                    {teste.type}
                   </p>
-                  <p>
+                  {/* <p>
                     <span>Descrição: </span>
                     {teste.test_description}
-                  </p>
+                  </p> */}
                 </div>
               ) : (
                 <div className={styles.teste_info}>

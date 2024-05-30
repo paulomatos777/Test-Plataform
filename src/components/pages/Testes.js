@@ -66,9 +66,9 @@ function Testes() {
           testes.map((teste) => (
             <TestCard
               id={teste.id}
-              name={teste.test_title}
-              description={teste.test_description}
-              category={teste.test_environment}
+              name={teste.name}
+              max_value={teste.max_value}
+              type={teste.type}
               // state={teste.state.name}
               key={teste.id}
               handleRemove={removeTest}

@@ -8,11 +8,9 @@ function NewTask() {
   function handleSubmit(test, e) {
     e.preventDefault();
     api.post("/testes", {
-      test_title: test.name,
-      test_description: test.description,
-      author: test.name,
-      test_status: test.state.name,
-      test_environment: test.category.name,
+      name: test.name,
+      max_value: test.max_value,
+      type: test.type,
     });
     navigate("/testes");
   }
