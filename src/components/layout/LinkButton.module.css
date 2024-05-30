@@ -1,11 +1,12 @@
 .btn {
-  background-color: #5e17eb;
-  color: #fff;
-  padding: 0.5em 1em;
-  text-decoration: none;
-  transition: 0.5s;
+	background-color: #5e17eb;
+	color: #fff;
+	padding: 0.5em 1em;
+	text-decoration: none;
+	transition: 0.5s;
+	border-radius: 100px;
 }
 
 .btn:hover {
-  color: rgb(0, 87, 187);
+	color: rgb(123, 185, 255);
 }
