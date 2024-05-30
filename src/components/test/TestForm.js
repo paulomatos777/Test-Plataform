@@ -6,8 +6,9 @@ import styles from "./TestForm.module.css";
 
 function TestForm({ handleSubmit, btnText, testData }) {
 	const [payment, setPayment] = useState(testData || {});
+	console.log(payment);
 
-	const categories = [
+	const types = [
 		{
 			key: "eletronic",
 			value: "Eletrônico",
@@ -22,21 +23,11 @@ function TestForm({ handleSubmit, btnText, testData }) {
 		setPayment({ ...payment, [e.target.name]: e.target.value });
 	}
 
-	function handleCategory(e) {
+	function handleType(e) {
 		console.log(e);
 		setPayment({
 			...payment,
 			type: {
-				key: e.target.value,
-				value: e.target.options[e.target.selectedIndex].text,
-			},
-		});
-	}
-
-	function handleState(e) {
-		setPayment({
-			...payment,
-			state: {
 				id: e.target.value,
 				name: e.target.options[e.target.selectedIndex].text,
 			},
@@ -68,9 +59,9 @@ function TestForm({ handleSubmit, btnText, testData }) {
 					type="text"
 					name="type"
 					text="Selecione o tipo"
-					options={categories}
-					handleOnChange={handleCategory}
-					value={payment.category ? payment.category.name : ""}
+					options={types}
+					handleOnChange={handleType}
+					value={payment.type ? payment.type.name : ""}
 				/>
 			</div>
 			<div>

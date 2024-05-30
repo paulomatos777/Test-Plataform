@@ -10,7 +10,7 @@ function NewTask() {
 		api.post("/testes", {
 			name: test.name,
 			max_value: test.max_value,
-			type: test.type,
+			type: test.type.name,
 		});
 		navigate("/testes");
 	}
