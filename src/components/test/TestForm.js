@@ -18,17 +18,6 @@ function TestForm({ handleSubmit, btnText, testData }) {
 		},
 	];
 
-	const states = [
-		{
-			key: "working",
-			value: "working",
-		},
-		{
-			key: "error",
-			value: "error",
-		},
-	];
-
 	function handleChange(e) {
 		setPayment({ ...payment, [e.target.name]: e.target.value });
 	}
@@ -37,9 +26,9 @@ function TestForm({ handleSubmit, btnText, testData }) {
 		console.log(e);
 		setPayment({
 			...payment,
-			category: {
-				id: e.target.value,
-				name: e.target.options[e.target.selectedIndex].text,
+			type: {
+				key: e.target.value,
+				value: e.target.options[e.target.selectedIndex].text,
 			},
 		});
 	}
@@ -76,6 +65,7 @@ function TestForm({ handleSubmit, btnText, testData }) {
 			</div>
 			<div>
 				<Select
+					type="text"
 					name="type"
 					text="Selecione o tipo"
 					options={categories}
