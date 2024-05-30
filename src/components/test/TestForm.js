@@ -49,7 +49,7 @@ function TestForm({ handleSubmit, btnText, testData }) {
 					name="max_value"
 					placeholder="Valor máximo do método de pagamento"
 					handleOnChange={handleChange}
-					value={payment.description}
+					value={payment.max_value}
 				/>
 			</div>
 			<div>
@@ -59,7 +59,7 @@ function TestForm({ handleSubmit, btnText, testData }) {
 					text="Selecione o tipo"
 					options={types}
 					handleOnChange={handleType}
-					value={payment.type ? payment.type.name : ""}
+					value={payment.type ? payment.type.value : ""}
 				/>
 			</div>
 			<div>
