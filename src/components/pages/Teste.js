@@ -47,22 +47,6 @@ function Teste() {
 					console.error("ops! ocorreu um erro : " + err);
 				});
 		}, 300);
-
-		// fetch(`http://localhost:5000/testes/${teste.id}`, {
-		//   method: "PATCH",
-		//   headers: {
-		//     "Content-Type": "Application/json",
-		//   },
-		//   body: JSON.stringify(teste),
-		// })
-		//   .then((resp) => resp.json())
-		//   .then((data) => {
-		//     setTeste(data);
-		//     setShowTesteForm(false);
-		//     setMessage("Projeto Atualizado!");
-		//     setType("sucess");
-		//   })
-		//   .catch((err) => console.log(err));
 	}
 
 	return (
