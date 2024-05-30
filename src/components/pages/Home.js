@@ -10,7 +10,7 @@ function Home() {
 				Bem-Vindo ao <span>Exmed Payments</span>
 			</h1>
 			<p>Gerenciador de métodos de pagamento</p>
-			<LinkButton to="/newtask" text="Criar Teste" />
+			<LinkButton to="/newtask" text="Adicionar meio de pagamento" />
 			<img src={photo} className={styles.img} />
 		</section>
 	);

@@ -19,7 +19,7 @@ function NewTask() {
 		<div className={styles.newtask_container}>
 			<h1>Adicionar método de pagamento</h1>
 			<p>Adicione seu método de pagamento desejado</p>
-			<TestForm btnText="Criar teste" handleSubmit={handleSubmit} />
+			<TestForm btnText="Adicionar " handleSubmit={handleSubmit} />
 		</div>
 	);
 }

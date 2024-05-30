@@ -5,7 +5,7 @@ import SubmitButton from "../form/SubmitButton";
 import styles from "./TestForm.module.css";
 
 function TestForm({ handleSubmit, btnText, testData }) {
-	const [test, setTest] = useState(testData || {});
+	const [payment, setPayment] = useState(testData || {});
 
 	const categories = [
 		{
@@ -30,13 +30,13 @@ function TestForm({ handleSubmit, btnText, testData }) {
 	];
 
 	function handleChange(e) {
-		setTest({ ...test, [e.target.name]: e.target.value });
+		setPayment({ ...payment, [e.target.name]: e.target.value });
 	}
 
 	function handleCategory(e) {
 		console.log(e);
-		setTest({
-			...test,
+		setPayment({
+			...payment,
 			category: {
 				id: e.target.value,
 				name: e.target.options[e.target.selectedIndex].text,
@@ -45,8 +45,8 @@ function TestForm({ handleSubmit, btnText, testData }) {
 	}
 
 	function handleState(e) {
-		setTest({
-			...test,
+		setPayment({
+			...payment,
 			state: {
 				id: e.target.value,
 				name: e.target.options[e.target.selectedIndex].text,
@@ -55,41 +55,32 @@ function TestForm({ handleSubmit, btnText, testData }) {
 	}
 
 	return (
-		<form onSubmit={(e) => handleSubmit(test, e)} className={styles.form}>
+		<form onSubmit={(e) => handleSubmit(payment, e)} className={styles.form}>
 			<Input
 				type="text"
 				text="Nome do método de pagamento"
 				name="name"
 				placeholder="Insira o nome do método de pagamento"
 				handleOnChange={handleChange}
-				value={test.name}
+				value={payment.name}
 			/>
 			<div>
 				<Input
-					type="text"
+					type="integer"
 					text="Valor máximo"
-					name="description"
+					name="max_value"
 					placeholder="Valor máximo do método de pagamento"
 					handleOnChange={handleChange}
-					value={test.description}
+					value={payment.description}
 				/>
 			</div>
 			<div>
 				<Select
-					name="envirement_id"
+					name="type"
 					text="Selecione o tipo"
 					options={categories}
 					handleOnChange={handleCategory}
-					value={test.category ? test.category.name : ""}
-				/>
-			</div>
-			<div>
-				<Select
-					name="status_id"
-					text="Selecione o Status"
-					options={states}
-					handleOnChange={handleState}
-					value={test.state ? test.state.id : ""}
+					value={payment.category ? payment.category.name : ""}
 				/>
 			</div>
 			<div>
