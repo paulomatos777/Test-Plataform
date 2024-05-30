@@ -6,7 +6,6 @@ import styles from "./TestForm.module.css";
 
 function TestForm({ handleSubmit, btnText, testData }) {
 	const [payment, setPayment] = useState(testData || {});
-	console.log(payment);
 
 	const types = [
 		{
@@ -24,7 +23,6 @@ function TestForm({ handleSubmit, btnText, testData }) {
 	}
 
 	function handleType(e) {
-		console.log(e);
 		setPayment({
 			...payment,
 			type: {
