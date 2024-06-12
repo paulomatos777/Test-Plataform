@@ -31,3 +31,70 @@
   font-weight: bold;
   color: #00d1bc;
 }
+
+/**/
+
+.footer {
+  background-color: rgb(94, 23, 235);
+  color: white;
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.footer_section {
+  flex: 1;
+  min-width: 200px;
+  margin: 10px;
+}
+
+.footer_section h3 {
+  border-bottom: 1px solid #fff;
+  padding-bottom: 5px;
+  margin-bottom: 10px;
+}
+
+.contact_list,
+.payment_list,
+.social_list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.contact_list li,
+.payment_list li,
+.social_list li {
+  margin: 5px 0;
+}
+
+.footer_section a {
+  color: white;
+  text-decoration: none;
+}
+
+.footer_section a:hover {
+  text-decoration: underline;
+}
+
+.payment_list li {
+  display: inline;
+  margin-right: 10px;
+}
+
+.social_list {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.social_list li {
+  margin: 0 10px;
+  font-size: 1.5em;
+}
+
+.copy_right {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 0.8em;
+}

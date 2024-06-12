@@ -7,6 +7,8 @@ import Navbar from "./components/layout/Navbar";
 import Testes from "./components/pages/Testes";
 import Footer from "./components/layout/Footer";
 import Teste from "./components/pages/Teste";
+import Login from "./components/pages/Login";
+import ChangePassword from "./components/pages/ChangePassword";
 
 function App() {
   return (
@@ -15,9 +17,13 @@ function App() {
       <Container customClass="min-height">
         <Routes>
           <Route exact path="/" element={<Home />} />
-          <Route path="/newtask" element={<NewTask />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/trocar-senha" element={<ChangePassword />} />
+          <Route path="/solicitacao" element={<NewTask />} />
+          <Route path="/cadastro" element={<NewTask />} />
+          {/* <Route path="/newtask" element={<NewTask />} />
           <Route path="/testes" element={<Testes />} />
-          <Route path="/teste/:id" element={<Teste />} />
+          <Route path="/teste/:id" element={<Teste />} /> */}
         </Routes>
       </Container>
       <Footer />

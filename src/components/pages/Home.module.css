@@ -1,30 +1,122 @@
 .home_container {
-	width: 100%;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	padding: 4em;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* padding: 4em; */
+  /* padding: 2rem; */
+  margin: 2rem;
 }
 
 .home_container h1 {
-	font-size: 2.5em;
-	margin-bottom: 0.5em;
+  font-size: 2.5em;
+  margin-bottom: 0.5em;
 }
 
 .home_container h1 span {
-	color: #fff;
-	padding: 0 0.2em;
-	background-color: #5e17eb;
-	border-radius: 8px;
+  color: #fff;
+  padding: 0 0.2em;
+  background-color: #5e17eb;
+  border-radius: 8px;
 }
 
 .home_container p {
-	margin-bottom: 1.5em;
-	color: #7b7b7b;
+  margin-bottom: 1.5em;
+  color: #4d4444;
 }
 
-.home_container img {
-	width: auto;
-	margin: 2em 0;
+.home_container iframe {
+  margin: 2em 0;
+  border-radius: 2%;
+}
+
+.gallery {
+  display: flex;
+  /* flex-wrap: wrap; */
+  flex-direction: row;
+  justify-content: center;
+  gap: 10px;
+  padding: 20px;
+}
+.gallery_item {
+  border: 2px solid #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+}
+
+.gallery_item img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+}
+
+.gallery_item:hover {
+  transform: scale(1.05);
+}
+
+.gallery_title {
+  font-size: 24px;
+}
+
+.services {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
+}
+
+.service_item {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  max-width: 250px;
+  text-align: center;
+}
+
+.service_item h3 {
+  margin-bottom: 10px;
+  font-size: 1.2em;
+  color: #333;
+}
+
+.service_item p {
+  font-size: 1em;
+  color: #666;
+}
+
+.founders {
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.founders table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.founders th,
+.founders td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.founders th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+.founders tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.founders tr:hover {
+  background-color: #ddd;
 }
