@@ -3,6 +3,8 @@
 // import TestForm from "../test/TestForm";
 import {useState} from "react";
 import styles from "./Login.module.css";
+import axios from 'axios';
+import http from '../../http/index.js';
 
 function Login() {
     const [email, setEmail] = useState('');
@@ -23,18 +25,39 @@ function Login() {
       setMessage('O login deve ter formato de e-mail válido.');
       return;
     }
-    if (!password) {
-      setMessage('O campo de senha deve ser preenchido.');
-      return;
-    }
-    setMessage('Validação realizada com sucesso');
+    // if (!password) {
+    //   setMessage('O campo de senha deve ser preenchido.');
+    //   return;
+    // }
+    //setMessage('Validação realizada com sucesso');
     // Navegar para a página de conteúdo
+
+    axios.post("http://localhost:3000/login", {
+      email: email,
+      password: password
+    }).then((response) => {
+      console.log('login realizado com sucesso!');
+      if(response.data.status == 200){
+        localStorage.setItem('token', response.data.data.token);
+        localStorage.setItem('user_email', response.data.data.user_login);
+        localStorage.setItem('user_name', response.data.data.user_name);
+      }
+    }).catch((error) => {
+      console.log(error);
+    })
   };
 
   const handleClear = () => {
-    setEmail('');
-    setPassword('');
-    setMessage('');
+    http.get('/service').then((response) => {
+      if(response.data.status == 200){
+        console.log(response.data.data.services)
+      }
+    }).catch((error) => {
+      console.log(error);
+    })
+    // setEmail('');
+    // setPassword('');
+    // setMessage('');
   };
   
     return (
