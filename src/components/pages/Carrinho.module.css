@@ -1,0 +1,68 @@
+/* styles.module.css */
+
+.container {
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.usuarioLogado {
+  margin-bottom: 20px;
+}
+
+.usuarioLogado div {
+  margin-bottom: 10px;
+}
+
+.usuarioLogado label {
+  display: inline-block;
+  width: 120px;
+  font-weight: bold;
+}
+
+.solicitacoesAnteriores {
+  margin-bottom: 20px;
+}
+
+.solicitacoesAnteriores table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.solicitacoesAnteriores th,
+.solicitacoesAnteriores td {
+  border: 1px solid #ccc;
+  padding: 8px;
+}
+
+.novaSolicitacao {
+  margin-bottom: 20px;
+}
+
+.novaSolicitacao div {
+  margin-bottom: 10px;
+}
+
+.novaSolicitacao label {
+  display: inline-block;
+  width: 150px;
+  font-weight: bold;
+}
+
+.novaSolicitacao button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.input {
+  width: calc(100% - 160px); /* width - label width */
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}

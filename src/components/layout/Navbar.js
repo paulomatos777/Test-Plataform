@@ -20,10 +20,10 @@ function Navbar() {
 						<Link to="/login">Login</Link>
 					</li>
 					<li className={styles.item}>
-						<Link to="/testes">Cadastrar</Link>
+						<Link to="/register">Cadastrar</Link>
 					</li>
 					<li className={styles.item}>
-						<Link to="/testes">Solicitações</Link>
+						<Link to="/solicitacao">Solicitações</Link>
 					</li>
 				</ul>
 			</Container>

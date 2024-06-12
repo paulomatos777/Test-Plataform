@@ -9,6 +9,9 @@ import Footer from "./components/layout/Footer";
 import Teste from "./components/pages/Teste";
 import Login from "./components/pages/Login";
 import ChangePassword from "./components/pages/ChangePassword";
+import Register from "./components/pages/Register";
+import Carrinho from "./components/pages/Carrinho";
+// import Register from "./components/pages/Register";
 
 function App() {
   return (
@@ -19,8 +22,8 @@ function App() {
           <Route exact path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/trocar-senha" element={<ChangePassword />} />
-          <Route path="/solicitacao" element={<NewTask />} />
-          <Route path="/cadastro" element={<NewTask />} />
+          <Route path="/solicitacao" element={<Carrinho />} />
+          <Route path="/register" element={<Register />} />
           {/* <Route path="/newtask" element={<NewTask />} />
           <Route path="/testes" element={<Testes />} />
           <Route path="/teste/:id" element={<Teste />} /> */}
