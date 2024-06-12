@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import styles from './ChangePassword.module.css'; // Importando o arquivo CSS
+// import axios from 'axios';
+import http from '../../http/index.js';
 
 const ChangePassword = () => {
   const [login, setLogin] = useState('');
@@ -9,36 +11,46 @@ const ChangePassword = () => {
 
   const handleTrocaSenha = () => {
     // Validação do login
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!login || !emailRegex.test(login)) {
-      setMensagem('Por favor, insira um e-mail válido no campo de login.');
-      return;
-    }
+    // const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    // if (!login || !emailRegex.test(login)) {
+    //   setMensagem('Por favor, insira um e-mail válido no campo de login.');
+    //   return;
+    // }
 
     // Validação da senha
-    if (!senha) {
-      setMensagem('Por favor, insira uma senha.');
-      return;
-    }
+    // if (!senha) {
+    //   setMensagem('Por favor, insira uma senha.');
+    //   return;
+    // }
 
     // Validação da confirmação de senha
-    if (!confirmSenha) {
-      setMensagem('Por favor, confirme sua senha.');
-      return;
-    }
+    // if (!confirmSenha) {
+    //   setMensagem('Por favor, confirme sua senha.');
+    //   return;
+    // }
 
     // Validação da composição da senha
-    const senhaRegex = /^(?=.*[0-9])(?=.*[A-Z])(?=.*[@#$%&*!?/\\|\-_+.=]).{6,}$/;
-    if (!senhaRegex.test(senha)) {
-      setMensagem('A senha deve ter pelo menos 6 caracteres, incluindo pelo menos um número, uma letra maiúscula e um dos seguintes caracteres especiais: @ # $ % & * ! ? / \ | - _ + . =');
-      return;
-    }
+    // const senhaRegex = /^(?=.*[0-9])(?=.*[A-Z])(?=.*[@#$%&*!?/\\|\-_+.=]).{6,}$/;
+    // if (!senhaRegex.test(senha)) {
+    //   setMensagem('A senha deve ter pelo menos 6 caracteres, incluindo pelo menos um número, uma letra maiúscula e um dos seguintes caracteres especiais: @ # $ % & * ! ? / \ | - _ + . =');
+    //   return;
+    // }
 
     // Validação da senha e confirmação de senha coincidem
-    if (senha !== confirmSenha) {
-      setMensagem('A senha e a confirmação de senha não coincidem.');
-      return;
-    }
+    // if (senha !== confirmSenha) {
+    //   setMensagem('A senha e a confirmação de senha não coincidem.');
+    //   return;
+    // }
+
+    http.put("/change-password", {
+        email: login,
+        password: senha,
+        new_password:confirmSenha
+    }).then((response) => {
+      console.log('senha alterada com sucesso!');
+    }).catch((error) => {
+      console.log(error);
+    })
 
     // Todas as validações passaram
     setMensagem('Validação realizada com sucesso.');

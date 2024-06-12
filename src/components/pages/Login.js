@@ -25,13 +25,10 @@ function Login() {
       setMessage('O login deve ter formato de e-mail válido.');
       return;
     }
-    // if (!password) {
-    //   setMessage('O campo de senha deve ser preenchido.');
-    //   return;
-    // }
-    //setMessage('Validação realizada com sucesso');
-    // Navegar para a página de conteúdo
-
+    if (!password) {
+      setMessage('O campo de senha deve ser preenchido.');
+      return;
+    }
     axios.post("http://localhost:3000/login", {
       email: email,
       password: password
@@ -55,9 +52,9 @@ function Login() {
     }).catch((error) => {
       console.log(error);
     })
-    // setEmail('');
-    // setPassword('');
-    // setMessage('');
+    setEmail('');
+    setPassword('');
+    setMessage('');
   };
   
     return (

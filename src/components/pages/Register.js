@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styles from './Register.module.css'; // Importe seus estilos CSS aqui
-
+import axios from 'axios';
 function Register() {
 
     const [email, setEmail] = useState('');
@@ -15,6 +15,29 @@ function Register() {
     const [mensagem, setMensagem] = useState('');
   
     const handleIncluir = () => {
+
+      axios.post("http://localhost:3000/user", {
+        user:{
+          name: nome,
+          email: email,
+          password: senha,
+          cpf: cpf,
+          birthdate: dataNascimento,
+          cellphone:telefone,
+          marital_status:estadoCivil,
+          scholarity: escolaridade
+        }
+      }).then((response) => {
+        console.log('login realizado com sucesso!');
+        // if(response.data.status == 200){
+        //   localStorage.setItem('token', response.data.data.token);
+        //   localStorage.setItem('user_email', response.data.data.user_login);
+        //   localStorage.setItem('user_name', response.data.data.user_name);
+        // }
+      }).catch((error) => {
+        console.log(error);
+      })
+
       // Validações...
   
       // Simulação de sucesso
