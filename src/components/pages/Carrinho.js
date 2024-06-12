@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
-import styles from './Carrinho.module.css'; // Importe seus estilos CSS aqui
+import React, { useState, useEffect } from 'react';
+import styles from './Carrinho.module.css'; 
+import http from '../../http/index.js';
 
 const Carrinho = () => {
     const [servicoSelecionado, setServicoSelecionado] = useState('');
     const [dataPrevistaAtendimento, setDataPrevistaAtendimento] = useState('');
     const [status, setStatus] = useState('Em elaboração');
+    const [services, setServices] = useState([]);
     const [solicitacoes, setSolicitacoes] = useState([
       { dataPedido: '01/06/2024', numSolicitacao: 123456, servico: 'Manutenção de rede', status: 'Em andamento', preco: 100, dataPrevista: '01/07/2024' },
       { dataPedido: '03/06/2024', numSolicitacao: 789012, servico: 'Instalação de software', status: 'Concluído', preco: 50, dataPrevista: '15/06/2024' },
@@ -16,6 +18,14 @@ const Carrinho = () => {
       novasSolicitacoes.splice(index, 1);
       setSolicitacoes(novasSolicitacoes);
     };
+
+    useEffect(() => {
+      http.get('/service').then((response) => {
+        if(response.data.status == 200){
+          setServices(response.data.data.services);
+        }
+      })
+    }, []);
   
     const handleIncluirSolicitacao = () => {
       // Lógica para incluir a solicitação na tabela
@@ -88,9 +98,9 @@ const Carrinho = () => {
               className={styles.input}
             >
               <option value="">Selecione...</option>
-              <option value="Manutenção de rede">Manutenção de rede</option>
-              <option value="Instalação de software">Instalação de software</option>
-              <option value="Configuração de segurança">Configuração de segurança</option>
+              {services.map((service, index) => (
+                <option value={service.index}>{service.description}</option>
+              ))}
             </select>
           </div>
           <div>

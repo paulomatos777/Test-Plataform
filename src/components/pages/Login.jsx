@@ -5,11 +5,15 @@ import {useState} from "react";
 import styles from "./Login.module.css";
 import axios from 'axios';
 import http from '../../http/index.js';
+import useAuth from '../../utils/useAuth.js'; 
+import { toast } from 'react-toastify';
 
 function Login() {
-    const [email, setEmail] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
+  const [isDisabled, setIsDisabled] = useState(false);
+  const { login } = useAuth();
 
   const validateEmail = (email) => {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -17,15 +21,19 @@ function Login() {
   };
 
   const handleLogin = () => {
+    setIsDisabled(true);
     if (!email) {
       setMessage('O campo de login deve ser preenchido.');
+      setIsDisabled(false);
       return;
     }
     if (!validateEmail(email)) {
       setMessage('O login deve ter formato de e-mail válido.');
+      setIsDisabled(false);
       return;
     }
     if (!password) {
+      setIsDisabled(false);
       setMessage('O campo de senha deve ser preenchido.');
       return;
     }
@@ -35,23 +43,22 @@ function Login() {
     }).then((response) => {
       console.log('login realizado com sucesso!');
       if(response.data.status == 200){
-        localStorage.setItem('token', response.data.data.token);
-        localStorage.setItem('user_email', response.data.data.user_login);
-        localStorage.setItem('user_name', response.data.data.user_name);
+        login(response.data.data.token, response.data.data.user_login, response.data.data.user_name);
+        toast.success(response.data.message);
+        setTimeout(() => {
+          window.location.reload();
+        }, 5000);
+      }else{
+        toast.error(response.data.message);
+        setIsDisabled(false);
       }
     }).catch((error) => {
       console.log(error);
+      setIsDisabled(false);
     })
   };
 
   const handleClear = () => {
-    http.get('/service').then((response) => {
-      if(response.data.status == 200){
-        console.log(response.data.data.services)
-      }
-    }).catch((error) => {
-      console.log(error);
-    })
     setEmail('');
     setPassword('');
     setMessage('');
@@ -74,7 +81,7 @@ function Login() {
               onChange={(e) => setPassword(e.target.value)}
             />
             <div className={styles.button_group}>
-              <button onClick={handleLogin}>Realizar Login</button>
+              <button onClick={handleLogin} disabled={isDisabled}>Realizar Login</button>
               <button onClick={handleClear}>Limpar</button>
             </div>
             {message && <p className={styles.message}>{message}</p>}

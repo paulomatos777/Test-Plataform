@@ -13,6 +13,16 @@ function Register() {
     const [estadoCivil, setEstadoCivil] = useState('solteiro');
     const [escolaridade, setEscolaridade] = useState('2o grau completo');
     const [mensagem, setMensagem] = useState('');
+
+    const handleCPF = (event) => {
+      const inputValue = event.target.value.replace(/\D/g, '');
+      const maskedValue = inputValue
+        .replace(/\D/g, '') 
+        .replace(/^(\d{0,3})(\d{0,3})/, '$1.$2') 
+        .replace(/^(\d{3}\.\d{3})(\d{0,3})/, '$1.$2') 
+        .replace(/^(\d{3}\.\d{3}\.\d{3})/, '$1-');
+      setCpf(maskedValue);
+    };
   
     const handleIncluir = () => {
 
@@ -128,7 +138,9 @@ function Register() {
             id="cpfInput"
             type="text"
             value={cpf}
-            onChange={(e) => setCpf(e.target.value)}
+            onChange={handleCPF}
+            placeholder="xxx.xxx.xxx-xx"
+            maxLength={14}
             className={styles.input}
           />
         </div>
