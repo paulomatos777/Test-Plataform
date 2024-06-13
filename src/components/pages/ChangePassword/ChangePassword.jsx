@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import styles from './ChangePassword.module.css'; // Importando o arquivo CSS
-// import axios from 'axios';
-import http from '../../http/index.js';
+import styles from './ChangePassword.module.css'; 
+import http from '../../../http/index.js';
 import { toast } from 'react-toastify';
 
 const ChangePassword = () => {
@@ -14,28 +13,29 @@ const ChangePassword = () => {
 
   const handleTrocaSenha = () => {
     setIsDisabled(true);
-    ///Validação do login
+
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!login || !emailRegex.test(login)) {
+      setIsDisabled(false);
       setMensagem('Por favor, insira um e-mail válido no campo de login.');
       return;
     }
 
-    //Validação da senha
     if (!senha) {
+      setIsDisabled(false);
       setMensagem('Por favor, insira a senha atual!');
       return;
     }
 
-    //Validação da confirmação de senha
     if (!confirmSenha) {
+      setIsDisabled(false);
       setMensagem('Por favor, insira a nova senha!');
       return;
     }
 
-    //Validação da composição da senha
     const senhaRegex = /^(?=.*[0-9])(?=.*[A-Z])(?=.*[@#$%&*!?/\\|\-_+.=]).{6,}$/;
     if (!senhaRegex.test(confirmSenha)) {
+      setIsDisabled(false);
       setMensagem('A senha deve ter pelo menos 6 caracteres, incluindo pelo menos um número, uma letra maiúscula e um dos seguintes caracteres especiais: @ # $ % & * ! ? / \ | - _ + . =');
       return;
     }
@@ -56,9 +56,12 @@ const ChangePassword = () => {
     }).catch((error) => {
       toast.error("Erro ao atualizar a senha!");
     }).finally(() => {
-      setIsDisabled(true);
+      setIsDisabled(false);
     })
 
+    setLogin('');
+    setSenha('');
+    setConfirmSenha('');
     setMensagem('');
     setValidatedData(false);
   };
@@ -74,7 +77,6 @@ const ChangePassword = () => {
   return (
     <div className={styles.container}>
       <h1>Troca senha de clientes</h1>
-      {/* <img src="caminho/do/logo.png" alt="Logo da Empresa" className={styles.logo} /> */}
       <div className={styles.inputContainer}>
         <label htmlFor="loginInput">Login:</label>
         <input

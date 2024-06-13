@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styles from "./CreateService.module.css";
-import http from '../../http/index.js';
+import http from '../../../http/index.js';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 
@@ -31,22 +31,28 @@ function CreateService() {
   };
 
   const handleRegisterService = () => {
+    setIsDisabled(true);
+
     if (!serviceName) {
       toast.error('O nome do serviço deve ser preenchido!');
+      setIsDisabled(false);
       return;
     }
     if (!isNumber(servicePrice)) {
       toast.error('O preço do serviço deve ser um número!');
+      setIsDisabled(false);
       return;
     }
 
     if (!serviceDeadline) {
       toast.error('O prazo de atendimento deve ser preenchido!');
+      setIsDisabled(false);
       return;
     }
     
     if (!isNumber(serviceDeadline)) {
       toast.error('O prazo de atendimento deve ser um número!');
+      setIsDisabled(false);
       return;
     }
 
@@ -68,6 +74,8 @@ function CreateService() {
       }).catch((error) => {
         toast.error('Erro ao criar serviço de TI!');
       })
+      
+      setIsDisabled(false);
       setServiceName('');
       setServicePrice('');
       setServiceDeadline('');
@@ -106,7 +114,7 @@ function CreateService() {
         />
         <div className={styles.button_group}>
           <button onClick={handleRegisterService} disabled={isDisabled}>Cadastrar Serviço</button>
-          <button onClick={handleClear}>Limpar</button>
+          <button onClick={handleClear} disabled={isDisabled}>Limpar</button>
         </div>
         {message && <p className={styles.message}>{message}</p>}
       </div>

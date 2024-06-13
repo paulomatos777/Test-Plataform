@@ -1,8 +1,8 @@
 import {useState} from "react";
 import styles from "./Login.module.css";
 import axios from 'axios';
-import http from '../../http/index.js';
-import useAuth from '../../utils/useAuth.js'; 
+import http from '../../../http/index.js';
+import useAuth from '../../../utils/useAuth.js'; 
 import { toast } from 'react-toastify';
 
 function Login() {

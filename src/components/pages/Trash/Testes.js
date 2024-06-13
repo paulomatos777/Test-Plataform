@@ -1,12 +1,12 @@
-import Message from "../layout/Message";
+import Message from "../../layout/Message";
 import { useLocation } from "react-router-dom";
 import styles from "./Testes.module.css";
-import Container from "../layout/Container";
-import LinkButton from "../layout/LinkButton";
-import TestCard from "../test/TestCard";
+import Container from "../../layout/Container";
+import LinkButton from "../../layout/LinkButton";
+import TestCard from "../../test/TestCard";
 import { useState, useEffect } from "react";
-import Loading from "../layout/Loading";
-import { api } from "../../services/api";
+import Loading from "../../layout/Loading";
+import { api } from "../../../services/api";
 
 function Testes() {
 	const [testes, setTestes] = useState([]);

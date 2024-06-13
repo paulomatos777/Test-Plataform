@@ -17,7 +17,9 @@ function Register() {
     const [estadoCivil, setEstadoCivil] = useState('solteiro');
     const [escolaridade, setEscolaridade] = useState('2o grau completo');
     const [mensagem, setMensagem] = useState('');
-    const [validatedData, setValidatedData] = useState(false)
+    const [validatedData, setValidatedData] = useState(false);
+    const [isDisabled, setIsDisabled] = useState(false);
+    
 
     const handleCPF = (event) => {
       const inputValue = event.target.value.replace(/\D/g, '');
@@ -83,9 +85,11 @@ function Register() {
     };
   
     const handleIncluir = () => {
+      setIsDisabled(true);
 
       if(nome =='' || nome == undefined){
         toast.error('O nome deve inserido!');
+        setIsDisabled(false);
         return;
       }
 
@@ -93,64 +97,76 @@ function Register() {
 
       if(splitedName.length < 2){
         toast.error('No campo Nome deve haver pelo menos 2 palavras!');
+        setIsDisabled(false);
         return;
       }
 
       if(splitedName[0].length < 2){
         toast.error('O primeiro nome deve ter 2 caracteres ou mais!');
+        setIsDisabled(false);
         return;
       }
 
       if(!isValidString(nome)){
         toast.error('Não deve haver caracteres especiais no nome!');
+        setIsDisabled(false);
         return;
       }
       
       if(email == '' || email == undefined){
         toast.error('O e-mail deve inserido!');
+        setIsDisabled(false);
         return;
       }
 
       if (!validateEmail(email)) {
         toast.error('Insira um e-mail válido!');
         setEmail('');
+        setIsDisabled(false);
         return;
       }
 
       if (!senha || senha == '' || senha == undefined) {
         toast.error('Por favor, digite a senha!');
+        setIsDisabled(false);
         return;
       }
   
       //Validação da confirmação de senha
       if (!confirmSenha || confirmSenha == '' || confirmSenha == undefined) {
         toast.error('Por favor, digite a confirmação da senha!');
+        setIsDisabled(false);
         return;
       }
 
       if(senha != confirmSenha){
         toast.error('A senha deve ser igual a confirmação!');
+        setIsDisabled(false);
         return;
       }
   
       const senhaRegex = /^(?=.*[0-9])(?=.*[A-Z])(?=.*[@#$%&*!?/\\|\-_+.=]).{6,}$/;
       if (!senhaRegex.test(confirmSenha)) {
         setMensagem('A senha deve ter pelo menos 6 caracteres, incluindo pelo menos um número, uma letra maiúscula e um dos seguintes caracteres especiais: @ # $ % & * ! ? / \ | - _ + . =');
+        setIsDisabled(false);
         return;
       }
 
       if(cpf =='' || cpf == undefined){
         toast.error('O CPF deve inserido!');
+        setIsDisabled(false);
         return;
       }
 
       if(!validateCPF(cpf)){
         toast.error('Insira um CPF válido!');
+        setIsDisabled(false);
         return;
       }
     
       if(dataNascimento =='' || dataNascimento == undefined){
         toast.error('A data de nascimento deve inserida!');
+        setIsDisabled(false);
         return;
       }
 
@@ -158,11 +174,13 @@ function Register() {
 
       if(currentDate.diff(dataNascimento, 'years') <= 17){
         toast.error('O cliente deve ter +18 anos!');
+        setIsDisabled(false);
         return;
       }
 
       if(!validatePhoneNumber(telefone)){
         toast.error('Para utilizar um telefone deve ser válido!');
+        setIsDisabled(false);
         return;
       }
 
@@ -192,6 +210,7 @@ function Register() {
 
       setMensagem('');  
       setValidatedData(false);
+      setIsDisabled(false);
       setEmail('');
       setSenha('');
       setConfirmSenha('');
@@ -365,9 +384,9 @@ function Register() {
           </select>
         </div>
   
-        <button onClick={handleIncluir} className={styles.button}>Incluir</button>
-        <button onClick={handleLimpar} className={styles.button}>Limpar</button>
-        <button onClick={handleBack} className={styles.button}>Voltar</button>
+        <button onClick={handleIncluir} className={styles.button} disabled={isDisabled}>Incluir</button>
+        <button onClick={handleLimpar} className={styles.button} disabled={isDisabled}>Limpar</button>
+        <button onClick={handleBack} className={styles.button} disabled={isDisabled}>Voltar</button>
   
         {mensagem && <p className={validatedData ? styles.validated : styles.mensagem}>{mensagem}</p>}
       </div>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styles from './Carrinho.module.css'; 
-import http from '../../http/index.js';
+import http from '../../../http/index.js';
 import moment from 'moment';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';

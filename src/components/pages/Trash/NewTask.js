@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import { api } from "../../services/api";
-import TestForm from "../test/TestForm";
+import { api } from "../../../services/api";
+import TestForm from "../../test/TestForm";
 import styles from "./NewTask.module.css";
 
 function NewTask() {

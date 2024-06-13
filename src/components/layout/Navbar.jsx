@@ -3,10 +3,8 @@ import React, { useState, useEffect } from 'react';
 import Container from "./Container";
 import styles from "./Navbar.module.css";
 import logo from "../../img/logo.svg";
-import useAuth from '../../utils/useAuth.js';
 
 function Navbar() {
-	const { auth, logout } = useAuth();
 
 	return (
 		<div className={styles.navbar}>

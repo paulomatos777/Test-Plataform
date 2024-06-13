@@ -1,11 +1,11 @@
 import styles from "./Teste.module.css";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-import Loading from "../layout/Loading";
-import Container from "../layout/Container";
-import TestForm from "../test/TestForm";
-import Message from "../layout/Message";
-import { api } from "../../services/api";
+import Loading from "../../layout/Loading";
+import Container from "../../layout/Container";
+import TestForm from "../../test/TestForm";
+import Message from "../../layout/Message";
+import { api } from "../../../services/api";
 
 function Teste() {
 	const { id } = useParams();
