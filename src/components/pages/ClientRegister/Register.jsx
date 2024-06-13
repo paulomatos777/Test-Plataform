@@ -88,7 +88,7 @@ function Register() {
       setIsDisabled(true);
 
       if(nome =='' || nome == undefined){
-        toast.error('O nome deve inserido!');
+        toast.error('O nome deve ser inserido!');
         setIsDisabled(false);
         return;
       }
@@ -108,13 +108,13 @@ function Register() {
       }
 
       if(!isValidString(nome)){
-        toast.error('Não deve haver caracteres especiais no nome!');
+        toast.error('Não pode haver caracteres especiais no nome!');
         setIsDisabled(false);
         return;
       }
       
       if(email == '' || email == undefined){
-        toast.error('O e-mail deve inserido!');
+        toast.error('O e-mail deve ser inserido!');
         setIsDisabled(false);
         return;
       }
@@ -153,7 +153,7 @@ function Register() {
       }
 
       if(cpf =='' || cpf == undefined){
-        toast.error('O CPF deve inserido!');
+        toast.error('O CPF deve ser inserido!');
         setIsDisabled(false);
         return;
       }
@@ -165,7 +165,7 @@ function Register() {
       }
     
       if(dataNascimento =='' || dataNascimento == undefined){
-        toast.error('A data de nascimento deve inserida!');
+        toast.error('A data de nascimento deve ser inserida!');
         setIsDisabled(false);
         return;
       }
