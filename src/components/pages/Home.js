@@ -82,6 +82,11 @@ const Gallery = () => {
 		name: "Guilherme Camara",
 		cv: "Profissional de TI com foco em operações e gestão de projetos tecnológicos."
 	  },
+	  {
+		role: "CMO",
+		name: "Thiago Medina",
+		cv: "Profissional de Marketing com foco em desenvolvimento de estratégias e gestão de marca."
+	  },
 	];
   
 	return (

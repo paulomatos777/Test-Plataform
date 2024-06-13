@@ -59,7 +59,8 @@ const ChangePassword = () => {
       setIsDisabled(true);
     })
 
-    // Aqui você pode adicionar a lógica para navegar para a página anterior
+    setMensagem('');
+    setValidatedData(false);
   };
 
   const handleLimpar = () => {

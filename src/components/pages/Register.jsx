@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
-import styles from './Register.module.css'; // Importe seus estilos CSS aqui
+import styles from './Register.module.css'; 
 import axios from 'axios';
+import moment from 'moment';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
+
 function Register() {
 
     const [email, setEmail] = useState('');
@@ -13,6 +17,7 @@ function Register() {
     const [estadoCivil, setEstadoCivil] = useState('solteiro');
     const [escolaridade, setEscolaridade] = useState('2o grau completo');
     const [mensagem, setMensagem] = useState('');
+    const [validatedData, setValidatedData] = useState(false)
 
     const handleCPF = (event) => {
       const inputValue = event.target.value.replace(/\D/g, '');
@@ -23,8 +28,146 @@ function Register() {
         .replace(/^(\d{3}\.\d{3}\.\d{3})/, '$1-');
       setCpf(maskedValue);
     };
+
+    const navigate = useNavigate();
+    const handleBack = () => {
+      navigate(-1);
+    };
+
+    const validateCPF = (cpf) => {
+      // Remove caracteres especiais
+      cpf = cpf.replace(/[^\d]/g, '');
+      
+      // Verifica se o CPF tem 11 dígitos
+      if (cpf.length !== 11) return false;
+      
+      // Elimina CPFs conhecidos inválidos
+      if (/^(\d)\1+$/.test(cpf)) return false;
+    
+      // Calcula o primeiro dígito verificador
+      let sum = 0;
+      for (let i = 0; i < 9; i++) {
+        sum += parseInt(cpf.charAt(i)) * (10 - i);
+      }
+      let firstCheck = 11 - (sum % 11);
+      if (firstCheck === 10 || firstCheck === 11) firstCheck = 0;
+      if (firstCheck !== parseInt(cpf.charAt(9))) return false;
+    
+      // Calcula o segundo dígito verificador
+      sum = 0;
+      for (let i = 0; i < 10; i++) {
+        sum += parseInt(cpf.charAt(i)) * (11 - i);
+      }
+      let secondCheck = 11 - (sum % 11);
+      if (secondCheck === 10 || secondCheck === 11) secondCheck = 0;
+      if (secondCheck !== parseInt(cpf.charAt(10))) return false;
+    
+      return true;
+    };
+
+    const validateEmail = (email) => {
+      const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return re.test(String(email).toLowerCase());
+    };
+
+    const forbiddenChars = /[@#$%&*!?/\\|_\-+=.̈{}\[\]́`~^:;<>,"‘]/;
+
+    const isValidString = (str) => !forbiddenChars.test(str);
+
+    const validatePhoneNumber = (phone) => {
+      if (!phone) return true;
+      
+      const phoneRegex = /^\(?\d{2}\)?[\s-]?9?\d{4}[\s-]?\d{4}$/;
+      
+      return phoneRegex.test(phone);
+    };
   
     const handleIncluir = () => {
+
+      if(nome =='' || nome == undefined){
+        toast.error('O nome deve inserido!');
+        return;
+      }
+
+      let splitedName = nome.split(" ");
+
+      if(splitedName.length < 2){
+        toast.error('No campo Nome deve haver pelo menos 2 palavras!');
+        return;
+      }
+
+      if(splitedName[0].length < 2){
+        toast.error('O primeiro nome deve ter 2 caracteres ou mais!');
+        return;
+      }
+
+      if(!isValidString(nome)){
+        toast.error('Não deve haver caracteres especiais no nome!');
+        return;
+      }
+      
+      if(email == '' || email == undefined){
+        toast.error('O e-mail deve inserido!');
+        return;
+      }
+
+      if (!validateEmail(email)) {
+        toast.error('Insira um e-mail válido!');
+        setEmail('');
+        return;
+      }
+
+      if (!senha || senha == '' || senha == undefined) {
+        toast.error('Por favor, digite a senha!');
+        return;
+      }
+  
+      //Validação da confirmação de senha
+      if (!confirmSenha || confirmSenha == '' || confirmSenha == undefined) {
+        toast.error('Por favor, digite a confirmação da senha!');
+        return;
+      }
+
+      if(senha != confirmSenha){
+        toast.error('A senha deve ser igual a confirmação!');
+        return;
+      }
+  
+      const senhaRegex = /^(?=.*[0-9])(?=.*[A-Z])(?=.*[@#$%&*!?/\\|\-_+.=]).{6,}$/;
+      if (!senhaRegex.test(confirmSenha)) {
+        setMensagem('A senha deve ter pelo menos 6 caracteres, incluindo pelo menos um número, uma letra maiúscula e um dos seguintes caracteres especiais: @ # $ % & * ! ? / \ | - _ + . =');
+        return;
+      }
+
+      if(cpf =='' || cpf == undefined){
+        toast.error('O CPF deve inserido!');
+        return;
+      }
+
+      if(!validateCPF(cpf)){
+        toast.error('Insira um CPF válido!');
+        return;
+      }
+    
+      if(dataNascimento =='' || dataNascimento == undefined){
+        toast.error('A data de nascimento deve inserida!');
+        return;
+      }
+
+      let currentDate = moment();
+
+      if(currentDate.diff(dataNascimento, 'years') <= 17){
+        toast.error('O cliente deve ter +18 anos!');
+        return;
+      }
+
+      if(!validatePhoneNumber(telefone)){
+        toast.error('Para utilizar um telefone deve ser válido!');
+        return;
+      }
+
+      setValidatedData(true);
+      setMensagem('Validação realizada com sucesso.');
 
       axios.post("http://localhost:3000/user", {
         user:{
@@ -38,22 +181,17 @@ function Register() {
           scholarity: escolaridade
         }
       }).then((response) => {
-        console.log('login realizado com sucesso!');
-        // if(response.data.status == 200){
-        //   localStorage.setItem('token', response.data.data.token);
-        //   localStorage.setItem('user_email', response.data.data.user_login);
-        //   localStorage.setItem('user_name', response.data.data.user_name);
-        // }
+        if(response.data.status == 200){
+          toast.success(response.data.message);
+        }else{
+          toast.error(response.data.message);
+        }
       }).catch((error) => {
-        console.log(error);
+        toast.error('Erro ao cadastrar cliente!');
       })
 
-      // Validações...
-  
-      // Simulação de sucesso
-      setMensagem('Validação realizada com sucesso.');
-  
-      // Limpar campos
+      setMensagem('');  
+      setValidatedData(false);
       setEmail('');
       setSenha('');
       setConfirmSenha('');
@@ -61,12 +199,8 @@ function Register() {
       setCpf('');
       setDataNascimento('');
       setTelefone('');
-  
-      // Voltar radio buttons e combo box para valores default
       setEstadoCivil('solteiro');
       setEscolaridade('2o grau completo');
-  
-      // Focar no campo de e-mail
       document.getElementById('emailInput').focus();
     };
   
@@ -233,9 +367,9 @@ function Register() {
   
         <button onClick={handleIncluir} className={styles.button}>Incluir</button>
         <button onClick={handleLimpar} className={styles.button}>Limpar</button>
-        <button className={styles.button}>Voltar</button>
+        <button onClick={handleBack} className={styles.button}>Voltar</button>
   
-        {mensagem && <p className={styles.mensagem}>{mensagem}</p>}
+        {mensagem && <p className={validatedData ? styles.validated : styles.mensagem}>{mensagem}</p>}
       </div>
     );
   };

@@ -1,27 +1,52 @@
-import React, { useState } from 'react';
-// import './ServiceRegistrationPage.css';
-// import logo from './logo.png'; // Certifique-se de ter o logo da empresa na pasta src
+import React, { useEffect, useState } from 'react';
 import styles from "./CreateService.module.css";
 import http from '../../http/index.js';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 function CreateService() {
   const [serviceName, setServiceName] = useState('');
   const [servicePrice, setServicePrice] = useState('');
   const [serviceDeadline, setServiceDeadline] = useState('');
   const [message, setMessage] = useState('');
+  const [isDisabled, setIsDisabled] = useState(false);
+
+  const navigate = useNavigate();
+  const handleBack = () => {
+    navigate(-1);
+  };
+
+  useEffect(() => {
+    if(!(localStorage.getItem('token') && localStorage.getItem('user_email') && localStorage.getItem('user_name'))){
+      setIsDisabled(true);
+      toast.error('Realize o login!');
+      setTimeout(() => {
+        handleBack();
+      }, 1500);
+    }
+  }, []);
+
+  const isNumber = (value) => {
+    return !isNaN(parseFloat(value)) && isFinite(value);
+  };
 
   const handleRegisterService = () => {
     if (!serviceName) {
-      setMessage('O nome do serviço deve ser preenchido.');
+      toast.error('O nome do serviço deve ser preenchido!');
       return;
     }
-    if (!servicePrice) {
-      setMessage('O preço do serviço deve ser preenchido.');
+    if (!isNumber(servicePrice)) {
+      toast.error('O preço do serviço deve ser um número!');
       return;
     }
+
     if (!serviceDeadline) {
-      setMessage('O prazo de atendimento deve ser preenchido.');
+      toast.error('O prazo de atendimento deve ser preenchido!');
+      return;
+    }
+    
+    if (!isNumber(serviceDeadline)) {
+      toast.error('O prazo de atendimento deve ser um número!');
       return;
     }
 
@@ -43,6 +68,10 @@ function CreateService() {
       }).catch((error) => {
         toast.error('Erro ao criar serviço de TI!');
       })
+      setServiceName('');
+      setServicePrice('');
+      setServiceDeadline('');
+      setMessage('');
     }
    
 
@@ -76,7 +105,7 @@ function CreateService() {
           onChange={(e) => setServiceDeadline(e.target.value)}
         />
         <div className={styles.button_group}>
-          <button onClick={handleRegisterService}>Cadastrar Serviço</button>
+          <button onClick={handleRegisterService} disabled={isDisabled}>Cadastrar Serviço</button>
           <button onClick={handleClear}>Limpar</button>
         </div>
         {message && <p className={styles.message}>{message}</p>}

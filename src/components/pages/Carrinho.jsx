@@ -3,6 +3,7 @@ import styles from './Carrinho.module.css';
 import http from '../../http/index.js';
 import moment from 'moment';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 const Carrinho = () => {
     const [servicoSelecionado, setServicoSelecionado] = useState('');
@@ -18,6 +19,21 @@ const Carrinho = () => {
       newRequestsService.splice(index, 1);
       setRequestServicesFromUser(newRequestsService);
     };
+
+    const navigate = useNavigate();
+    const handleBack = () => {
+      navigate(-1);
+    };
+
+    useEffect(() => {
+      if(!(localStorage.getItem('token') && localStorage.getItem('user_email') && localStorage.getItem('user_name'))){
+        setIsDisabled(true);
+        toast.error('Realize o login!');
+        setTimeout(() => {
+          handleBack();
+        }, 1500);
+      }
+    }, []);
 
     useEffect(() => {
       http.get('/service').then((response) => {

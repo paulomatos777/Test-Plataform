@@ -1,6 +1,3 @@
-// import { useNavigate } from "react-router-dom";
-// import { api } from "../../services/api";
-// import TestForm from "../test/TestForm";
 import {useState} from "react";
 import styles from "./Login.module.css";
 import axios from 'axios';
