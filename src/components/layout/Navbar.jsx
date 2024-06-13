@@ -37,6 +37,17 @@ function Navbar() {
 						:
 						''
 					}
+						{
+						localStorage.getItem('token') && localStorage.getItem('user_email') && localStorage.getItem('user_name')
+						?
+						<>
+							<li className={styles.item}>
+							<Link to="/criar-servico">Criar Serviço</Link>
+							</li>
+						</>
+						:
+						''
+					}
 				</ul>
 			</Container>
 		</div>

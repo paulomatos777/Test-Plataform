@@ -11,6 +11,7 @@ import Login from "./components/pages/Login";
 import ChangePassword from "./components/pages/ChangePassword";
 import Register from "./components/pages/Register";
 import Carrinho from "./components/pages/Carrinho";
+import CreateService from "./components/pages/CreateService";
 // import Register from "./components/pages/Register";
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/trocar-senha" element={<ChangePassword />} />
           <Route path="/solicitacao" element={<Carrinho />} />
+          <Route path="/criar-servico" element={<CreateService />} />
           <Route path="/register" element={<Register />} />
           {/* <Route path="/newtask" element={<NewTask />} />
           <Route path="/testes" element={<Testes />} />
